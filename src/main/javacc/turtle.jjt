@@ -16,7 +16,7 @@ options {
 }
 
 PARSER_BEGIN(TurtleParser)
-package turtle.parser;
+package com.schotanus.turtle.parser;
 
 /**
  * Parser for the Turtle language.
