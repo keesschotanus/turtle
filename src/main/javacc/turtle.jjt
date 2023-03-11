@@ -1,0 +1,454 @@
+/*
+ * Simple grammar for only a small part of the Logo language. Originaly I
+ * wanted to create a component based calculator but found out that it was
+ * relatively complex to parse even simple expressions like 2 + 3 * 4 ^ 2.
+ * When I came across the java compiler compiler parsing expressions like the
+ * one above suddenly was extremely simple and I decided to create my own simple
+ * programming language based upon the existing Logo language that originally
+ * was created at M.I.T. by M. Minsky.
+ */
+
+options {
+    IGNORE_CASE=true;       // Turtle language is case-insensitive
+    LOOKAHEAD=1;            // Context free with lookahead of 1 token
+    MULTI=true;             // Creates separate files
+    NODE_PREFIX="Node";     // Prefixes all generated files
+}
+
+PARSER_BEGIN(TurtleParser)
+package turtle.parser;
+
+/**
+ * Parser for the Turtle language.
+ * <br>The Turtle language borrows heavily from the Logo language but some
+ * important changes have been made that are documented separately.
+ * @author Kees Schotanus
+ * @version 1.0
+ */
+public class TurtleParser {
+
+    /**
+     * Driver method that reads from standard in and dumps the input in the form of
+     * a tree to standard out.
+     * @param args Not used.
+     */
+    public static void main(String args[]) throws ParseException {
+        TurtleParser parser = new TurtleParser(System.in);
+        try {
+            SimpleNode node = parser.parseUnit();
+            System.out.println("Input:" + node);
+            node.dump(">");
+            parser.jjtree.rootNode().interpret();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+}
+PARSER_END(TurtleParser)
+
+SKIP : // White space
+{
+    " "
+  | "\n"
+  | "\r"
+  | "\t"
+}
+
+SPECIAL_TOKEN :
+{
+  // Comment lines start with a semi-colon and last to EOL
+  <COMMENT: ";" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>
+}
+
+TOKEN : // Keywords
+{
+    < BACK:         "back" >
+  | < BACKGROUND:   "background" >
+  | < CLEAR:        "clear" >
+  | < COLOR:        "color" >
+  | < COSINE:       "cos" >
+  | < DOWN:         "down" >
+  | < ELSE:         "else" >
+  | < FORWARD:      "forward" >
+  | < HEAD:         "head" >
+  | < HIDE:         "hide" >
+  | < HOME:         "home" >
+  | < IF:           "if" >
+  | < LEFT:         "left" >
+  | < PEN:          "pen" >
+  | < POSITION:     "position" >
+  | < PRINT:        "print" >
+  | < REPCOUNT:     "repcount" >
+  | < REPEAT:       "repeat" >
+  | < RIGHT:        "right" >
+  | < SCREEN:       "screen" >
+  | < SINE:          "sin" >
+  | < SHOW:         "show" >
+  | < TO:           "to" >
+  | < TURTLE:       "turtle" >
+  | < UP:           "up" >
+  | < XPOSITION:    "xposition" >
+  | < WHILE:        "while" >
+  | < YPOSITION:    "yposition" >
+
+}
+
+TOKEN : // Separators
+{
+    < COLON:        ":" >
+  | < COMMA:        "," >
+  | < LBRACKET:     "[" >
+  | < LPARENS:      "(" >
+  | < POINT:        "." >
+  | < QUOTE:        "\"" >
+  | < RBRACKET:     "]" >
+  | < RPARENS:      ")" >
+}
+
+TOKEN : // Operators
+{
+    < DIVIDE:       "/" >
+  | < MINUS:        "-" >
+  | < MULTIPLY:     "*" >
+  | < PLUS:         "+" >
+  | < POWER:        "^" >
+}
+
+TOKEN : // Relational operators
+{
+    < EQUALS:       "==" >
+  | < GT:           ">" >
+  | < GTE:          ">=" >
+  | < LT:           "<" >
+  | < LTE:          "<=" >
+  | < UNEQUAL:      "!=" >
+}
+
+TOKEN : // Constants
+{
+    < CONSTANT: <FLOAT> >
+      | < #FLOAT: <INTEGER>
+      | <INTEGER> ( <POINT> <INTEGER> )?
+      | <POINT> <INTEGER> >
+        | < #INTEGER: ( <DIGIT> )+ >
+          | < #DIGIT: ["0" - "9"] >
+}
+
+TOKEN : // String literals
+{
+    < STRING_LITERAL: "\"" (~["\""])* "\"" >
+}
+
+TOKEN : // Names
+{
+    < NAME: ["A"-"Z"] ( ["A"-"Z", "0"-"9", "_", "."] )* >
+}
+
+TOKEN : // Variable (currently Turtle supports parameters only)
+{
+    < VARIABLE: <COLON> <NAME> >
+}
+
+/**
+ * Complete unit that can be parsed. As you can see a unit consists of function
+ * declarations and statements followed by EOF.
+ */
+SimpleNode parseUnit() #ParseUnit :
+{}
+{
+    ( FunctionDeclaration() | Statement() )* <EOF>
+    { return jjtThis; }
+}
+
+/**
+ * Declaration of a Turtle function like:
+ * TO SQUARE :SIZE [REPEAT 4 [FORWARD :SIZE RIGHT 90]]
+ * Logo uses an END statement to specify the end of the function declaration and
+ * has no special token to state the beginning of the function. Turtle enforces
+ * the use of a statement block to define the function.
+ */
+void FunctionDeclaration() :
+{Token name;}
+{
+    <TO> name = <NAME> ( (Variable())* ) #FormalArguments
+        StatementBlock()
+    { jjtThis.setName(name.image); }
+}
+
+/**
+ * Turtle defines a statement block as one or more statements within square
+ * brackets. This replaces Logos BEGIN and END keywords.
+ */
+void StatementBlock() :
+{}
+{
+    <LBRACKET> ( Statement() )+ <RBRACKET>
+}
+
+void Statement() : // Turtle statements
+{}
+{
+    BackgroundColorStatement()
+  | BackOrForwardStatement()
+  | ClearStatement()
+  | FunctionCall()
+  | HeadStatement()
+  | HomeStatement()
+  | IfStatement()
+  | LeftOrRightStatement()
+  | PenStatement()
+  | PrintStatement()
+  | RepeatStatement()
+  | ShowOrHideTurtleStatement()
+  | StatementBlock()
+  | UseTurtleStatement()
+  | WhileStatement()
+}
+
+/**
+ * Changes the background color.
+ * Logo doesn't need COMMAs between the red, green and blue parameter but
+ * Turtle does since it allows for easier parsing. Not using commas forces you
+ * to determine where a parameter expression starts and ends.
+ */
+void BackgroundColorStatement() :
+{}
+{
+    <BACKGROUND> <COLOR> Expression() <COMMA> Expression() <COMMA> Expression()
+}
+
+void BackOrForwardStatement() : // Movement statements BACK and FORWARD.
+{}
+{
+    <BACK> Expression()
+    { jjtThis.setForward(false); }
+  |  <FORWARD> Expression()
+    { jjtThis.setForward(true); }
+}
+
+void ClearStatement() : // Clears the entire screen.
+{}
+{
+    <CLEAR> <SCREEN>
+}
+
+/**
+ * Call to a Turtle function. Turtle forces you to separate parameters with
+ * COMMAs but Logo doesn't.
+ */
+void FunctionCall() :
+{Token token; }
+{
+    token=<NAME> [ Expression() ( <COMMA> Expression() )* ] #ActualArguments
+    { jjtThis.setName(token.image); }
+}
+
+void HeadStatement() : // Turns the turtle to the given heading.
+{}
+{
+    <HEAD> Expression()
+}
+
+void HomeStatement() : // Moves the turtle to the initial positions.
+{}
+{
+    <HOME>
+}
+
+/**
+ * Different Logo versions use different IF statements. Turtles IF statement
+ * re-uses the definition of a statement block.
+ */
+void IfStatement() :
+{}
+{
+    <IF> RelationalExpression() StatementBlock() [ <ELSE> StatementBlock() ]
+}
+
+void LeftOrRightStatement() : // Turns the turtle left or right.
+{}
+{
+    <LEFT> Expression()
+    { jjtThis.setLeft(true); }
+  | <RIGHT> Expression()
+    { jjtThis.setLeft(false); }
+}
+
+/**
+ * Collection of PEN statements. For some PEN statements Logo uses the SET
+ * keyword but Turtle does without a SET keyword.
+ */
+void PenStatement() #void :
+{}
+{
+    <PEN> ( (<UP> {jjtThis.setDown(false); } | <DOWN> {jjtThis.setDown(true); }) #PenUpOrDownStatement
+          | <COLOR> ( Expression() <COMMA> Expression() <COMMA> Expression() ) #PenColorStatement
+          | <POSITION> ( Expression() <COMMA> Expression() ) #PenPositionStatement
+          | <XPOSITION> Expression() #PenXPositionStatement
+          | <YPOSITION> Expression() #PenYPositionStatement
+    )
+}
+
+/**
+ * Print statement to output literals and the value of expressions. This
+ * statement allows you to write things like:
+ * PRINT "2+3*4=", 2+3*4
+ * Turtle allows an empty PRINT statements that forces a new line.
+ */
+void PrintStatement() :
+{Token token;}
+{
+    <PRINT>
+    [ ( Expression() | token=<STRING_LITERAL> {jjtThis.setText(token.image);} #StringLiteral )
+      ( <COMMA> ( Expression() | token=<STRING_LITERAL> {jjtThis.setText(token.image);} #StringLiteral ) )*
+    ]
+}
+
+/**
+ * Turtle repeat statement that also uses a statement block.
+ */
+void RepeatStatement() :
+{}
+{
+    <REPEAT> Expression() StatementBlock()
+}
+
+void ShowOrHideTurtleStatement() : // Shows or hides the turtle.
+{}
+{
+    <SHOW> <TURTLE>
+    { jjtThis.setShow(true); }
+  | <HIDE> <TURTLE>
+    { jjtThis.setShow(false); }
+}
+
+void UseTurtleStatement() : // Switches to another turtle.
+{}
+{
+    <TURTLE> Expression()
+}
+
+/**
+ * Turtles unique while statement.
+ */
+void WhileStatement() :
+{}
+{
+    <WHILE> RelationalExpression() StatementBlock()
+}
+
+/**
+ * Relational expressions ==, <, <=, >, >=, !=
+ * As you can see: Turtle uses the relational operators from C instead of the
+ * Logo language.
+ */
+void RelationalExpression() #void :
+{}
+{
+    AdditiveExpression() (
+        <EQUALS>  AdditiveExpression() #EqualToExpression(2)
+      | <LT>      AdditiveExpression() #LessThanExpression(2)
+      | <LTE>     AdditiveExpression() #LessThanOrEqualToExpression(2)
+      | <GT>      AdditiveExpression() #GreaterThanExpression(2)
+      | <GTE>     AdditiveExpression() #GreaterThanOrEqualToExpression(2)
+      | <UNEQUAL> AdditiveExpression() #UnequalToExpression(2)
+    )*
+}
+
+void Expression() #void : // Basic expression.
+{}
+{
+    AdditiveExpression()
+}
+
+/**
+ * Add and subtract containing multiplicative expressions since multiplication
+ * has to be performed before adding/subtracting.
+ */
+void AdditiveExpression() #void :
+{}
+{
+    MultiplicativeExpression() (
+        <PLUS>  MultiplicativeExpression() #AddExpression(2)
+      | <MINUS> MultiplicativeExpression() #SubtractExpression(2)
+    )*
+}
+
+/**
+ * Multiplication and division containing power expressions since exponentiation
+ * has to be performed before multiplication/division.
+ */
+void MultiplicativeExpression() #void :
+{}
+{
+    PowerExpression() (
+        <MULTIPLY> PowerExpression() #MultiplyExpression(2)
+      | <DIVIDE>   PowerExpression() #DivideExpression(2)
+    )*
+}
+
+/**
+ * Exponentiation. Since exponentiation should be evaluated from right to left
+ * I used a right recursive expression that looks ahead for other power
+ * expressions to the right. This is better explained in a JavaWorld article
+ * about javacc.
+ */
+void PowerExpression() #void :
+{}
+{
+    (
+        UnaryExpression() ( LOOKAHEAD( <POWER> ) <POWER> PowerExpression() )*
+    ) #PowerExpression(>1)
+}
+
+/**
+ * A unary expression might be 3 or -3.
+ */
+void UnaryExpression() :
+{}
+{
+    <MINUS> { jjtThis.setSign(-1); } Element()
+  | Element()
+}
+
+void Element() #void : // Definition of an element.
+{}
+{
+    <LPARENS> Expression() <RPARENS>
+  | ArithmeticFunctionCall()
+  | Constant()
+  | RepCount()
+  | Variable()
+}
+
+/**
+ * Arithmetic functions. Unlike Turtle functions arithmetic functions should
+ * be called using parenthesis like SIN(30)
+ */
+void ArithmeticFunctionCall() #void :
+{Token token;}
+{
+    ( <SINE> <LPARENS> [Expression()] <RPARENS> ) #SineFunction()
+  | ( <COSINE> <LPARENS> [Expression()] <RPARENS> ) #CosineFunction()
+}
+
+void Constant() : // Constant
+{ Token token; }
+{
+    token=<CONSTANT>
+    { jjtThis.setValue(Double.parseDouble(token.image)); }
+}
+
+void RepCount() :
+{}
+{
+    <REPCOUNT>
+}
+
+void Variable() : // Variable (actually a parameter).
+{ Token token; }
+{
+    token=<VARIABLE>
+    { jjtThis.setName(token.image); }
+}
+
