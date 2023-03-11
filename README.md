@@ -4,3 +4,6 @@ The Turtle project supports the Turtle graphics commands you will find in the Lo
 I created the project in the year 2000, to gain some experience with JavaCC technology.
 
 Currently the project supports JavaCC 7.0.10 and Java version 17.
+
+The end result is an executable jar file, that you can run using:
+java -jar turtle.jar
