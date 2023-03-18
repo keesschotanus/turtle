@@ -1,8 +1,8 @@
 /*
- * Simple grammar for only a small part of the Logo language. Originaly I
+ * Simple grammar for only a small part of the Logo language. Originally I
  * wanted to create a component based calculator but found out that it was
  * relatively complex to parse even simple expressions like 2 + 3 * 4 ^ 2.
- * When I came across the java compiler compiler parsing expressions like the
+ * When I came across the java compiler compiler, parsing expressions like the
  * one above suddenly was extremely simple and I decided to create my own simple
  * programming language based upon the existing Logo language that originally
  * was created at M.I.T. by M. Minsky.

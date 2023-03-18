@@ -1,3 +1,16 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "cSpell.words": [
+        "Applicationable",
+        "Commandable",
+        "iconifiable",
+        "Kees",
+        "localizable",
+        "maximizable",
+        "schotanus"
+    ],
+    "java.dependency.packagePresentation": "flat",
+    "java.project.sourcePaths": [
+        "src/main/java"
+    ]
 }

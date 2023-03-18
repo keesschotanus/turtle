@@ -15,7 +15,7 @@ if [[ "$CLASSPATH" != *"javacc"* ]]; then
 fi
 
 # Generate Java parser classes and javacc/turtle.jj file.
-java -classpath $CLASSPATH jjtree -multi -node_package=com.schotanus.turtle.parser -jjtree_output_directory=../src/main/java/com/schotanus/turtle/parser -output_file=../../../../../javacc/turtle.jj ../src/main/javacc/turtle.jjt
+java -classpath $CLASSPATH jjtree -node_uses_parser=true -multi -node_package=com.schotanus.turtle.parser -jjtree_output_directory=../src/main/java/com/schotanus/turtle/parser -output_file=../../../../../javacc/turtle.jj ../src/main/javacc/turtle.jjt
 
 # Generate Java parser classes from javacc/turtle.jj file.
 java -classpath $CLASSPATH javacc -output_directory=../src/main/java/com/schotanus/turtle/parser "../src/main/javacc/turtle.jj"

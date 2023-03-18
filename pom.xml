@@ -4,7 +4,7 @@
 
   <groupId>com.schotanus.turtle</groupId>
   <artifactId>turtle</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Turtle</name>
@@ -15,4 +15,37 @@
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
+  <build>
+   <sourceDirectory>./src/main/java</sourceDirectory>
+    <outputDirectory>./target/classes</outputDirectory>
+    <resources>
+      <resource>
+        <directory>./src/main/resources</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>com.schotanus.turtle.TurtleApp</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
