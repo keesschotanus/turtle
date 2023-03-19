@@ -23,7 +23,7 @@ class NodeCosineFunction extends SimpleNode {
     jjtGetChild(0).interpret();
 
     double value = ((Double)expressionStack.pop()).doubleValue();
-    expressionStack.push(new Double(Math.cos(Math.toRadians(value))));
+    expressionStack.push(Double.valueOf(Math.cos(Math.toRadians(value))));
   }
 
 }

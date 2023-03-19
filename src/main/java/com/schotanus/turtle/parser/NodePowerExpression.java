@@ -19,7 +19,7 @@ class NodePowerExpression extends SimpleNode {
     jjtGetChild(1).interpret();
     double rightOperand = ((Double)expressionStack.pop()).doubleValue();
 
-    expressionStack.push(new Double(Math.pow(leftOperand, rightOperand)));
+    expressionStack.push(Double.valueOf(Math.pow(leftOperand, rightOperand)));
   }
 }
 /* JavaCC - OriginalChecksum=7a320baf53e3a59a819c3eedcdba5c82 (do not edit this line) */

@@ -16,11 +16,11 @@ class NodeRepeatStatement extends SimpleNode {
     jjtGetChild(0).interpret();
     int count = ((Double)expressionStack.pop()).intValue();
 
-    repCountStack.push(new Double(1));
+    repCountStack.push(Double.valueOf(1.0));
     for (int i = 0; i < count; i++) {
       jjtGetChild(1).interpret();
       double repCount = ((Double)repCountStack.pop()).doubleValue();
-      repCountStack.push(new Double(++repCount));
+      repCountStack.push(Double.valueOf(++repCount));
     }
     repCountStack.pop();
   }

@@ -15,7 +15,7 @@ class NodeRepCount extends SimpleNode {
   public void interpret() {
     if (repCountStack.isEmpty()) {
       System.out.println("repcount used outside repeat");
-      expressionStack.push(new Double(0));
+      expressionStack.push(Double.valueOf(0.0));
     } else {
       expressionStack.push(repCountStack.peek());
     }

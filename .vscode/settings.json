@@ -4,10 +4,18 @@
         "Applicationable",
         "Commandable",
         "iconifiable",
+        "javacc",
+        "jjtree",
         "Kees",
         "localizable",
+        "LPARENS",
         "maximizable",
-        "schotanus"
+        "println",
+        "REPCOUNT",
+        "RPARENS",
+        "schotanus",
+        "xposition",
+        "yposition"
     ],
     "java.dependency.packagePresentation": "flat",
     "java.project.sourcePaths": [

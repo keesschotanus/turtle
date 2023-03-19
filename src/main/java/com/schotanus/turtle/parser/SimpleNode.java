@@ -87,10 +87,10 @@ public abstract class SimpleNode implements Node {
     return id;
   }
 
-  protected static Stack expressionStack = new Stack();
-  protected static Stack functionCallStack = new Stack();
-  protected static Stack repCountStack = new Stack();
-  protected static Hashtable functions = new Hashtable();
+  protected static Stack<Object> expressionStack = new Stack<>();
+  protected static Stack<FunctionCall> functionCallStack = new Stack<>();
+  protected static Stack<Double> repCountStack = new Stack<>();
+  protected static Hashtable<String, Object> functions = new Hashtable<>();
 
   protected TurtleTerritoryModel turtleTerritoryModel =
       TurtleApp.getTurtleTerritoryModel();

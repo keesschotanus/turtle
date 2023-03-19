@@ -19,7 +19,7 @@ class NodeLessThanOrEqualToExpression extends SimpleNode {
     jjtGetChild(1).interpret();
     double rightOperand = ((Double)expressionStack.pop()).doubleValue();
 
-    expressionStack.push(new Boolean(leftOperand <= rightOperand));
+    expressionStack.push(Boolean.valueOf(leftOperand <= rightOperand));
   }
 }
 /* JavaCC - OriginalChecksum=7c4f2c2e8d9e031332a30edd1b4160c8 (do not edit this line) */

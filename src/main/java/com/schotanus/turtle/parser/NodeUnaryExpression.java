@@ -22,7 +22,7 @@ class NodeUnaryExpression extends SimpleNode {
     jjtGetChild(0).interpret();
     if (sign == -1.0) {
       double value = ((Double)expressionStack.pop()).doubleValue();
-      expressionStack.push(new Double(sign * value));
+      expressionStack.push(Double.valueOf(sign * value));
     }
   }
 }

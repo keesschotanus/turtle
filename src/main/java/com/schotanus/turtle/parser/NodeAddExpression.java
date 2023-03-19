@@ -26,7 +26,7 @@ class NodeAddExpression extends SimpleNode {
     jjtGetChild(1).interpret();
     double rightOperand = ((Double)expressionStack.pop()).doubleValue();
 
-    expressionStack.push(new Double(leftOperand + rightOperand));
+    expressionStack.push(Double.valueOf(leftOperand + rightOperand));
   }
 }
 /* JavaCC - OriginalChecksum=8439a5b71541d28a642acf173d2c9044 (do not edit this line) */

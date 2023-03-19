@@ -22,7 +22,7 @@ class NodeGreaterThanExpression extends SimpleNode {
     double leftOperand = ((Double)expressionStack.pop()).doubleValue();
     jjtGetChild(1).interpret();
     double rightOperand = ((Double)expressionStack.pop()).doubleValue();
-    expressionStack.push(new Boolean(leftOperand > rightOperand));
+    expressionStack.push(Boolean.valueOf(leftOperand > rightOperand));
   }
 }
 /* JavaCC - OriginalChecksum=4d962cba95c3ef8447c607e64400b895 (do not edit this line) */

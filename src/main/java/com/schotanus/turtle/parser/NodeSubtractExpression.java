@@ -19,7 +19,7 @@ class NodeSubtractExpression extends SimpleNode {
     jjtGetChild(1).interpret();
     double rightOperand = ((Double)expressionStack.pop()).doubleValue();
 
-    expressionStack.push(new Double(leftOperand - rightOperand));
+    expressionStack.push(Double.valueOf(leftOperand - rightOperand));
   }
 }
 /* JavaCC - OriginalChecksum=de035175f5416991129570807923b916 (do not edit this line) */

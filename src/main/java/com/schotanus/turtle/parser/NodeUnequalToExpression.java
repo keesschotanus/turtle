@@ -19,7 +19,7 @@ class NodeUnequalToExpression extends SimpleNode {
     jjtGetChild(1).interpret();
     double rightOperand = ((Double)expressionStack.pop()).doubleValue();
 
-    expressionStack.push(new Boolean(leftOperand != rightOperand));
+    expressionStack.push(Boolean.valueOf(leftOperand != rightOperand));
   }
 
 }

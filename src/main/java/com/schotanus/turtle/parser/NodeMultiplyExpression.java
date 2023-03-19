@@ -19,7 +19,7 @@ class NodeMultiplyExpression extends SimpleNode {
     jjtGetChild(1).interpret();
     double rightOperand = ((Double)expressionStack.pop()).doubleValue();
 
-    expressionStack.push(new Double(leftOperand * rightOperand));
+    expressionStack.push(Double.valueOf(leftOperand * rightOperand));
   }
 }
 /* JavaCC - OriginalChecksum=cdd08cbb48487d0c3e64652e39c0e101 (do not edit this line) */

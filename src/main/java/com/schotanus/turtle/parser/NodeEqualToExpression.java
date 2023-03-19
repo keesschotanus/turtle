@@ -22,7 +22,7 @@ class NodeEqualToExpression extends SimpleNode {
     double leftOperand = ((Double)expressionStack.pop()).doubleValue();
     jjtGetChild(1).interpret();
     double rightOperand = ((Double)expressionStack.pop()).doubleValue();
-    expressionStack.push(new Boolean(leftOperand == rightOperand));
+    expressionStack.push(Boolean.valueOf(leftOperand == rightOperand));
   }  
 }
 /* JavaCC - OriginalChecksum=61c6e4a1f7f526b779fc1c3dc84e189d (do not edit this line) */

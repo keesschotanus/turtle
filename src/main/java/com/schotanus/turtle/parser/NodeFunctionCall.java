@@ -55,7 +55,7 @@ public class NodeFunctionCall extends SimpleNode {
           + actualArguments.jjtGetNumChildren() + " are supplied!");
       } else {
         // Interpret arguments and store their values
-        Hashtable parameterValues = new Hashtable();
+        final Hashtable<String, Object> parameterValues = new Hashtable<>();
         for (int i = 0; i < formalArguments.jjtGetNumChildren(); i++) {
           actualArguments.jjtGetChild(i).interpret();
           NodeVariable variable = (NodeVariable)formalArguments.jjtGetChild(i);

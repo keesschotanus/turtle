@@ -1,11 +1,3 @@
-/*
- * Copyright (�) 2000 C. Schotanus
- * Kees Schotanus
- * Jan Steenlaan 9
- * 3931 LA  Woudenberg
- * kees.schotanus@tip.nl
- */
-
 package com.schotanus.turtle.parser;
 
 import java.util.Hashtable;
@@ -26,10 +18,10 @@ public class FunctionCall {
 
     /**
      * Actual arguments to the function call.
-     * <br>hashkey = parameter name (stored in lower case).
-     * hashvalue = parameter value.
+     * The key is the name of the parameter (stored in lower case).
+     * The value is the value of the parameter.
      */
-    private Hashtable parameterValues;
+    private Hashtable<String, Object> parameterValues;
 
     /**
      * Constructs a function call.
@@ -38,7 +30,7 @@ public class FunctionCall {
      */
     public FunctionCall(
             final NodeFunctionDeclaration function,
-            final Hashtable parameterValues) {
+            final Hashtable<String, Object> parameterValues) {
         this.function = function;
         this.parameterValues = parameterValues;
     }
@@ -53,7 +45,7 @@ public class FunctionCall {
      */
     public Object getParameterValue(final String parameterName)
             throws InterpretationException {
-        Double value = (Double)parameterValues.get(parameterName.toLowerCase());
+        final Double value = (Double)parameterValues.get(parameterName.toLowerCase());
         if (value == null) {
             throw new InterpretationException("Parameter: " + parameterName
                 + " does not exist in function:" + function.getName());

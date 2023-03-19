@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JToolBar;
 
 import com.schotanus.turtle.TurtleApp;
-import com.schotanus.turtle.view.AbstractMDIFrame;
 
 /**
  * Multiple Document Interface for the turtle program.

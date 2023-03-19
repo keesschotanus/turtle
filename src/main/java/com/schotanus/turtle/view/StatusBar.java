@@ -1,7 +1,5 @@
 package com.schotanus.turtle.view;
 
-import java.io.Serializable;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
@@ -21,7 +19,7 @@ import com.schotanus.turtle.model.status.StatusModel;
  * @author Kees Schotanus
  * @version 1.2
  */
-public class StatusBar extends JLabel implements Serializable, StatusListener {
+public class StatusBar extends JLabel implements StatusListener {
 
     /**
      * Implementation note:

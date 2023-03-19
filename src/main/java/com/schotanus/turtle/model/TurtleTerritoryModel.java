@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
 
-import org.w3c.dom.events.Event;
-
 import com.schotanus.turtle.TurtleApp;
 import com.schotanus.turtle.parser.SimpleNode;
 import com.schotanus.turtle.parser.TurtleParser;

@@ -16,12 +16,12 @@ public class NodeFunctionDeclaration extends SimpleNode {
     super(p, id);
   }
 
-    /**
-     * Member access.
-     * @return {@link #name}.
-     */
-    public String getName() {
-      return name;
+  /**
+   * Member access.
+   * @return {@link #name}.
+   */
+  public String getName() {
+    return name;
   }
 
   /**
@@ -38,7 +38,7 @@ public class NodeFunctionDeclaration extends SimpleNode {
    * together with optional formal arguments and mandatory statement block
    * is stored in a functions hashtable with a key consisting of the lower-
    * case function name. When a function was previously declared the new
-   * functiondeclaration overwrites the old declaration.
+   * function declaration overwrites the old declaration.
    */
   public void interpret() {
       functions.put(name.toLowerCase(), this);

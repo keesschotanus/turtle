@@ -1,11 +1,3 @@
-/*
- * Copyright (�) 2000 C. Schotanus
- * Kees Schotanus
- * Jan Steenlaan 9
- * 3931 LA  Woudenberg
- * kees.schotanus@tip.nl
- */
-
 package com.schotanus.turtle.parser;
 
 

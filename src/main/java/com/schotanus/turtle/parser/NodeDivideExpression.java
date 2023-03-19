@@ -27,9 +27,9 @@ class NodeDivideExpression extends SimpleNode {
     double rightOperand = ((Double)expressionStack.pop()).doubleValue();
 
     if (rightOperand != 0) {
-      expressionStack.push(new Double(leftOperand / rightOperand));
+      expressionStack.push(Double.valueOf(leftOperand / rightOperand));
     } else {
-      expressionStack.push(new Double(0.0));
+      expressionStack.push(Double.valueOf(0.0));
       throw new InterpretationException("Division by zero!");
     }
   }

@@ -17,7 +17,7 @@ public class NodeParseUnit extends SimpleNode {
   public void interpret() throws InterpretationException {
     NodeFunctionDeclaration function = new NodeFunctionDeclaration(-1);
     function.setName("_DEFAULT");
-    functionCallStack.push(new FunctionCall(function, new Hashtable()));
+    functionCallStack.push(new FunctionCall(function, new Hashtable<String, Object>()));
 
     // Loop over all statements
     for (int i = 0; i < jjtGetNumChildren(); i++) {

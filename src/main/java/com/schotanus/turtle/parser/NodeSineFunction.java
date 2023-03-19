@@ -21,7 +21,7 @@ class NodeSineFunction extends SimpleNode {
     jjtGetChild(0).interpret();
 
     double value = ((Double)expressionStack.pop()).doubleValue();
-    expressionStack.push(new Double(Math.sin(Math.toRadians(value))));
+    expressionStack.push(Double.valueOf(Math.sin(Math.toRadians(value))));
   }
 }
 /* JavaCC - OriginalChecksum=04bd64482300d0053d2dfd648af008a2 (do not edit this line) */
