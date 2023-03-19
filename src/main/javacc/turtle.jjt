@@ -5,7 +5,7 @@
  * When I came across the java compiler compiler, parsing expressions like the
  * one above suddenly was extremely simple and I decided to create my own simple
  * programming language based upon the existing Logo language that originally
- * was created at M.I.T. by M. Minsky.
+ * was created at M.I.T. by S. Papert.
  */
 
 options {
