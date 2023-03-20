@@ -332,7 +332,32 @@ Here is an example:
 
 ![plot](./tutorial/spiral-inc-angle.png) 
 
+### Repeat revisited
+The repeat command gives you a variable named repcount.
+You can use this variable inside a repeat block.
 
+I will combine it with the turtle command that allows you to select
+a turtle from 0 (the default, up to and including 9).
+
+See if you can figure out what the following code does:
+
+```
+clear screen
+
+repeat 4 [
+  turtle repcount -1
+  right (repcount - 1) * 90
+  forward 100
+]
+```
+
+The first pass through the repeat block, repcount = 1.
+So turtle 0 is selected, it does not turn and moves forward 100 steps.
+The second pass, repcount is 2 so turtle 1 is selected, turned right 90 degrees
+and moved forward 100 steps. You get the gist.
+
+The code above shows that you can repcount in expressions
+and that parenthesis change the order in which expressions are evaluated.
 
  
 
