@@ -1,0 +1,20 @@
+pipeline {
+    agent { label 'jdk17' }
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/keesschotanus/turtle', branch: 'main'
+            }
+        }
+        stage('Compile') {
+            steps {
+                sh "mvn compile"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh "mvn test"
+            }
+        }
+    }
+}

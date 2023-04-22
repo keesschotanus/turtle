@@ -8,13 +8,15 @@ import org.junit.jupiter.api.Test;
 
 public class ParserTests {
 
+    /**
+     * Parses a simple Turtle statement.
+     */
     @Test
     void parseSimpleForwardStatement() {
-        final StringReader stringReader = new StringReader("forward 10");
         TurtleParser turtleParser;
         SimpleNode node;
         try {
-            turtleParser = new TurtleParser(stringReader);
+            turtleParser = new TurtleParser(new StringReader("forward 10"));
             node = TurtleParser.parseUnit();
             node.dump("");
         } catch (ParseException exception) {
