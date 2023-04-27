@@ -3,12 +3,11 @@ package com.schotanus.turtle.view;
 
 import java.awt.event.ActionEvent;
 import java.net.URL;
-import java.util.ResourceBundle;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
-import com.schotanus.turtle.AbstractApplication;
+import com.schotanus.turtle.TurtleApp;
 
 
 /**
@@ -77,41 +76,41 @@ public class CommandBasedAction extends AbstractAction {
 
         // Handle mandatory (for an Action) name.
         compositeKey = key + NAME;
-        value = AbstractApplication.getLocalizedString(compositeKey);
+        value = TurtleApp.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getLocalizedString(compositeKey);
+            value = TurtleApp.getLocalizedString(compositeKey);
         }
         putValue(NAME, value);
 
         // Handle optional label
         compositeKey = key + LABEL;
-        value = AbstractApplication.getLocalizedString(compositeKey);
+        value = TurtleApp.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getLocalizedString(compositeKey);
+            value = TurtleApp.getLocalizedString(compositeKey);
         }
         putValue(LABEL, value);
 
         // Handle optional mnemonic
         compositeKey = key + MNEMONIC;
-        value = AbstractApplication.getLocalizedString(compositeKey);
+        value = TurtleApp.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getLocalizedString(compositeKey);
+            value = TurtleApp.getLocalizedString(compositeKey);
         }
         putValue(MNEMONIC, value);
 
         // Handle optional accelerator
         compositeKey = key + ACCELERATOR;
-        value = AbstractApplication.getLocalizedString(compositeKey);
+        value = TurtleApp.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getLocalizedString(compositeKey);
+            value = TurtleApp.getLocalizedString(compositeKey);
         }
         putValue(ACCELERATOR, value);
 
         // Handle short description
         compositeKey = key + SHORT_DESCRIPTION;
-        value = AbstractApplication.getLocalizedString(compositeKey);
+        value = TurtleApp.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getLocalizedString(compositeKey);
+            value = TurtleApp.getLocalizedString(compositeKey);
         }
         if (value != null) {
             putValue(SHORT_DESCRIPTION, value);
@@ -119,9 +118,9 @@ public class CommandBasedAction extends AbstractAction {
 
         // Handle long description
         compositeKey = key + LONG_DESCRIPTION;
-        value = AbstractApplication.getLocalizedString(compositeKey);
+        value = TurtleApp.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getLocalizedString(compositeKey);
+            value = TurtleApp.getLocalizedString(compositeKey);
         }
         if (value != null) {
             putValue(LONG_DESCRIPTION, value);
@@ -129,9 +128,9 @@ public class CommandBasedAction extends AbstractAction {
 
         // Handle icon
         compositeKey = key + SMALL_ICON;
-        value = AbstractApplication.getLocalizedString(compositeKey);
+        value = TurtleApp.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getLocalizedString(compositeKey);
+            value = TurtleApp.getLocalizedString(compositeKey);
         }
         if (value != null) {
             final URL url = getClass().getResource(value);

@@ -11,7 +11,7 @@ import java.beans.PropertyVetoException;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 
-import com.schotanus.turtle.AbstractApplication;
+import com.schotanus.turtle.TurtleApp;
 
 
 /**
@@ -85,10 +85,10 @@ abstract class AbstractMDIFrame extends JFrame {
      */
     protected void addStatusBar() {
         final StatusBar statusBar = new StatusBar(
-            AbstractApplication.getStatusModel(), true, true);
+            TurtleApp.getStatusModel(), true, true);
         final StatusBarPanel statusBarPanel = new StatusBarPanel(statusBar);
         getContentPane().add(statusBarPanel, BorderLayout.SOUTH);
-        AbstractApplication.changeStatusModel("Initializing...");
+        TurtleApp.changeStatusModel("Initializing...");
     }
 
     /**

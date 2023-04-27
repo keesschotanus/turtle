@@ -8,7 +8,7 @@ import javax.swing.Action;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
-import com.schotanus.turtle.AbstractApplication;
+import com.schotanus.turtle.TurtleApp;
 import com.schotanus.util.Util;
 
 
@@ -66,12 +66,10 @@ public class GuiCreator {
 
         final JMenuBar menuBar = new JMenuBar();
 
-        final String mbContent = AbstractApplication.getLocalizedString(MENU_BAR);
+        final String mbContent = TurtleApp.getLocalizedString(MENU_BAR);
 
         final String [] menus = Util.tokenize(mbContent);
         for (int i = 0; i < menus.length; i++) {
-            System.out.println("Menu:" + menus[i]);
-
             final JMenu menu = createMenu(menus[i], actions);
             if (menus[i].equalsIgnoreCase(MENU_HELP)) {
                 menuBar.setHelpMenu(menu);
@@ -96,15 +94,14 @@ public class GuiCreator {
     public static JMenu createMenu(final String key, final Map<String, Action> actions) {
         // Label
         final String labelKey = key + MENU_LABEL;
-        final String menuLabel = AbstractApplication.getLocalizedString(labelKey);
+        final String menuLabel = TurtleApp.getLocalizedString(labelKey);
         final Menu menu = new Menu(menuLabel);
-System.out.println(menuLabel);
         GuiCreator.createTooltip(key, menu);
 
         GuiCreator.createMnemonic(key, menu);
 
         // Fill menu with menus and menu items
-        String menuContent = AbstractApplication.getLocalizedString(key);
+        String menuContent = TurtleApp.getLocalizedString(key);
 
         if (menuContent != null) {
             GuiCreator.createMenuItems(actions, menu, menuContent);
@@ -120,7 +117,7 @@ System.out.println(menuLabel);
      */
     private static void createTooltip(final String key, final Menu menu) {
         final String toolTipKey = key + MENU_TOOL_TIP_TEXT;
-        String toolTip = AbstractApplication.getLocalizedString(toolTipKey);
+        String toolTip = TurtleApp.getLocalizedString(toolTipKey);
         if (toolTip != null) {
             menu.setToolTipText(toolTip);
         }
@@ -133,7 +130,7 @@ System.out.println(menuLabel);
      */
     private static void createMnemonic(final String key, final Menu menu) {
         final String mnemonicKey = key + MENU_MNEMONIC;
-        String mnemonic = AbstractApplication.getLocalizedString(mnemonicKey);
+        String mnemonic = TurtleApp.getLocalizedString(mnemonicKey);
         if (mnemonic != null) {
             menu.setMnemonic(mnemonic.charAt(0));
         }
@@ -147,7 +144,6 @@ System.out.println(menuLabel);
     private static void createMenuItems(final Map<String, Action> actions,
             final Menu menu, String menuContent) {
         final String [] menuItems = Util.tokenize(menuContent);
-System.out.println(menuContent + menuItems.length)        ;
         for (int i = 0; i < menuItems.length; i++) {
             final String menuItem = menuItems[i];
             GuiCreator.createMenuItem(actions, menu, menuItem);
@@ -162,8 +158,7 @@ System.out.println(menuContent + menuItems.length)        ;
             menu.add(createMenu(menuItem, actions));
         } else {
             final String actionKey = menuItem + Action.NAME;
-            String actionName = AbstractApplication.getLocalizedString(actionKey);
-System.out.println("actionName" + actionName + actions.get(actionName));            
+            String actionName = TurtleApp.getLocalizedString(actionKey);
             if (actionName != null) {
                 final Action action = actions.get(actionName);
                 if (action != null) {

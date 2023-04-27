@@ -9,7 +9,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 
-import com.schotanus.turtle.AbstractApplication;
+import com.schotanus.turtle.TurtleApp;
 import com.schotanus.turtle.TurtleApp;
 
 
@@ -59,7 +59,7 @@ public class EditFrame extends JInternalFrame {
             try {
                 TurtleApp.getTurtleTerritoryModel().parse(editorPane.getText());
             } catch (Exception exception) {
-                AbstractApplication.changeStatusModel(exception.getMessage());
+                TurtleApp.changeStatusModel(exception.getMessage());
             }
         }
     }
