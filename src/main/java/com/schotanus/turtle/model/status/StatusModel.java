@@ -27,6 +27,7 @@
      * Constructor to make this StatusModel a Bean.
      */
     public StatusModel() {
+      // To make this class a bean.
     }
  
     /**
@@ -54,7 +55,7 @@
  
         final StatusEvent statusEvent = new StatusEvent(this, message, severity);
         for (int i = 0; i < targets.size(); i++) {
-            StatusListener statusListener = (StatusListener)targets.get(i);
+            StatusListener statusListener = targets.get(i);
             statusListener.statusModelHasChanged(statusEvent);
         }
     }

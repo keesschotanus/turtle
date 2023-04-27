@@ -31,7 +31,7 @@ abstract class AbstractMDIFrame extends JFrame {
      * It will get a status bar and actually make this frame visible,
      * using reasonable dimensions.
      */
-    public AbstractMDIFrame() {
+    protected AbstractMDIFrame() {
         /*
          * Add desktop pane to CENTER of content pane.
          * Some swing examples replace the content pane with a desktop pane but
@@ -43,6 +43,7 @@ abstract class AbstractMDIFrame extends JFrame {
 
         // Add a window listener to close this frame.
         WindowListener windowListener = new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent windowEvent) {
                 close();
             }
@@ -61,7 +62,7 @@ abstract class AbstractMDIFrame extends JFrame {
      * @param title Title of this frame.
      * @see #AbstractMDIFrame()
      */
-    public AbstractMDIFrame(final String title) {
+    protected AbstractMDIFrame(final String title) {
         this();
         setTitle(title);
     }

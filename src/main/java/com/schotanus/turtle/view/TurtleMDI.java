@@ -1,7 +1,8 @@
 package com.schotanus.turtle.view;
 
 import java.awt.BorderLayout;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -15,10 +16,10 @@ import com.schotanus.turtle.TurtleApp;
 public class TurtleMDI extends AbstractMDIFrame {
 
     /** 
-     * Hashtable containing {@link Action} objects that can be                                
+     * Map containing {@link Action} objects that can be                                
      * retrieved by using the key: {@link Action.NAME}.
      */
-    private final Hashtable<String, Action> actions = new Hashtable<>();
+    private final Map<String, Action> actions = new HashMap<>();
 
 
     /**

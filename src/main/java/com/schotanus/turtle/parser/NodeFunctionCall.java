@@ -2,8 +2,8 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=true,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=Node,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package com.schotanus.turtle.parser;
 
-import java.util.Hashtable;
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class NodeFunctionCall extends SimpleNode {
   /**
@@ -55,7 +55,7 @@ public class NodeFunctionCall extends SimpleNode {
           + actualArguments.jjtGetNumChildren() + " are supplied!");
       } else {
         // Interpret arguments and store their values
-        final Hashtable<String, Object> parameterValues = new Hashtable<>();
+        final Map<String, Object> parameterValues = new HashMap<>();
         for (int i = 0; i < formalArguments.jjtGetNumChildren(); i++) {
           actualArguments.jjtGetChild(i).interpret();
           NodeVariable variable = (NodeVariable)formalArguments.jjtGetChild(i);

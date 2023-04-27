@@ -8,7 +8,8 @@ import java.util.ResourceBundle;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
-import com.schotanus.turtle.TurtleApp;
+import com.schotanus.turtle.AbstractApplication;
+
 
 /**
  * Swing Action that uses the Command pattern.
@@ -40,7 +41,7 @@ public class CommandBasedAction extends AbstractAction {
      * Commandable that will execute a command.
      * this is the actual 'action' part of a Swing Action.
      */
-    private CommandableAction commandable;
+    private transient CommandableAction commandable;
 
     /**
      * Constructs a localizable, command based Action.
@@ -82,7 +83,7 @@ public class CommandBasedAction extends AbstractAction {
         compositeKey = key + NAME;
         value = resourceBundle.getString(compositeKey);
         if (value == null) {
-            value = TurtleApp.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getResourceBundle().getString(compositeKey);
         }
         putValue(NAME, value);
 
@@ -90,7 +91,7 @@ public class CommandBasedAction extends AbstractAction {
         compositeKey = key + LABEL;
         value = resourceBundle.getString(compositeKey);
         if (value == null) {
-            value = TurtleApp.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getResourceBundle().getString(compositeKey);
         }
         putValue(LABEL, value);
 
@@ -98,7 +99,7 @@ public class CommandBasedAction extends AbstractAction {
         compositeKey = key + MNEMONIC;
         value = resourceBundle.getString(compositeKey);
         if (value == null) {
-            value = TurtleApp.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getResourceBundle().getString(compositeKey);
         }
         putValue(MNEMONIC, value);
 
@@ -106,7 +107,7 @@ public class CommandBasedAction extends AbstractAction {
         compositeKey = key + ACCELERATOR;
         value = resourceBundle.getString(compositeKey);
         if (value == null) {
-            value = TurtleApp.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getResourceBundle().getString(compositeKey);
         }
         putValue(ACCELERATOR, value);
 
@@ -114,7 +115,7 @@ public class CommandBasedAction extends AbstractAction {
         compositeKey = key + SHORT_DESCRIPTION;
         value = resourceBundle.getString(compositeKey);
         if (value == null) {
-            value = TurtleApp.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getResourceBundle().getString(compositeKey);
         }
         if (value != null) {
             putValue(SHORT_DESCRIPTION, value);
@@ -124,7 +125,7 @@ public class CommandBasedAction extends AbstractAction {
         compositeKey = key + LONG_DESCRIPTION;
         value = resourceBundle.getString(compositeKey);
         if (value == null) {
-            value = TurtleApp.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getResourceBundle().getString(compositeKey);
         }
         if (value != null) {
             putValue(LONG_DESCRIPTION, value);
@@ -134,7 +135,7 @@ public class CommandBasedAction extends AbstractAction {
         compositeKey = key + SMALL_ICON;
         value = resourceBundle.getString(compositeKey);
         if (value == null) {
-            value = TurtleApp.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getResourceBundle().getString(compositeKey);
         }
         if (value != null) {
             final URL url = getClass().getResource(value);

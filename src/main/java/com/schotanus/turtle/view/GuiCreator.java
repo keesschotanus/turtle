@@ -1,7 +1,7 @@
 
 package com.schotanus.turtle.view;
 
-import java.util.Hashtable;
+import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -9,7 +9,7 @@ import javax.swing.Action;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
-import com.schotanus.turtle.TurtleApp;
+import com.schotanus.turtle.AbstractApplication;
 import com.schotanus.util.Util;
 
 
@@ -58,7 +58,7 @@ public class GuiCreator {
      * supplied actions.
      * @param resourceBundle The resource bundle that will be used to get
      *  resources from.
-     * @param actions Hashtable containing {@link Action} objects that can be
+     * @param actions Map containing {@link Action} objects that can be
      *  retrieved by using the key: {@link Action.NAME}.
      * @return Menu bar filled with menus and menu items.
      * @throws MissingResourceException When a required resource is missing.
@@ -67,7 +67,7 @@ public class GuiCreator {
      */
     public static JMenuBar createMenuBar(
             final ResourceBundle resourceBundle,
-            final Hashtable<String, Action> actions)
+            final Map<String, Action> actions)
             throws MissingResourceException {
 
         final JMenuBar menuBar = new JMenuBar();
@@ -92,7 +92,7 @@ public class GuiCreator {
      * @param resourceBundle ResourceBundle to get resources from.
      * @key Key by which the contents of the menu can be retrieved from the
      *  supplied bundle.
-     * @param actions Hashtable containing {@link Action} objects that can be
+     * @param actions Map containing {@link Action} objects that can be
      *  retrieved by using the key: {@link Action.NAME}.
      * @return Menu bar filled with menus and menu items.
      * @pre resourceBundle != null && key != null && actions != null
@@ -100,7 +100,7 @@ public class GuiCreator {
     public static JMenu createMenu(
             final ResourceBundle resourceBundle,
             final String key,
-            final Hashtable<String, Action> actions) {
+            final Map<String, Action> actions) {
         // Label
         final String labelKey = key + MENU_LABEL;
         final String menuLabel = resourceBundle.getString(labelKey);
@@ -110,7 +110,7 @@ public class GuiCreator {
         final String toolTipKey = key + MENU_TOOL_TIP_TEXT;
         String toolTip = resourceBundle.getString(toolTipKey);
         if (toolTip == null) {
-            toolTip = TurtleApp.getResourceBundle().getString(toolTipKey);
+            toolTip = AbstractApplication.getResourceBundle().getString(toolTipKey);
         }
         menu.setToolTipText(toolTip);
 
@@ -118,7 +118,7 @@ public class GuiCreator {
         final String mnemonicKey = key + MENU_MNEMONIC;
         String mnemonic = resourceBundle.getString(mnemonicKey);
         if (mnemonic == null) {
-            mnemonic = TurtleApp.getResourceBundle().getString(mnemonicKey);
+            mnemonic = AbstractApplication.getResourceBundle().getString(mnemonicKey);
         }
         if (mnemonic != null) {
             menu.setMnemonic(mnemonic.charAt(0));
@@ -127,7 +127,7 @@ public class GuiCreator {
         // Fill menu with menus and menu items
         String menuContent = resourceBundle.getString(key);
         if (menuContent == null) {
-            menuContent = TurtleApp.getResourceBundle().getString(key);
+            menuContent = AbstractApplication.getResourceBundle().getString(key);
         }
         if (menuContent != null) {
             final String [] menuItems = Util.tokenize(menuContent);
@@ -141,10 +141,10 @@ public class GuiCreator {
                     final String actionKey = menuItem + Action.NAME;
                     String actionName = resourceBundle.getString(actionKey);
                     if (actionName == null) {
-                        actionName = TurtleApp.getResourceBundle().getString(actionKey);
+                        actionName = AbstractApplication.getResourceBundle().getString(actionKey);
                     }
                     if (actionName != null) {
-                        final Action action = (Action)actions.get(actionName);
+                        final Action action = actions.get(actionName);
                         if (action != null) {
                             menu.add(action);
                         }

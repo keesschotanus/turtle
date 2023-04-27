@@ -2,7 +2,8 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=true,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=Node,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package com.schotanus.turtle.parser;
 
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import com.schotanus.turtle.TurtleApp;
@@ -90,7 +91,7 @@ public abstract class SimpleNode implements Node {
   protected static Stack<Object> expressionStack = new Stack<>();
   protected static Stack<FunctionCall> functionCallStack = new Stack<>();
   protected static Stack<Double> repCountStack = new Stack<>();
-  protected static Hashtable<String, Object> functions = new Hashtable<>();
+  protected static Map<String, Object> functions = new HashMap<>();
 
   protected TurtleTerritoryModel turtleTerritoryModel =
       TurtleApp.getTurtleTerritoryModel();

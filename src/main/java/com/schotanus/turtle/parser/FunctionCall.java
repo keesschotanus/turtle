@@ -1,6 +1,6 @@
 package com.schotanus.turtle.parser;
 
-import java.util.Hashtable;
+import java.util.Map;
 
 
 /**
@@ -21,7 +21,7 @@ public class FunctionCall {
      * The key is the name of the parameter (stored in lower case).
      * The value is the value of the parameter.
      */
-    private Hashtable<String, Object> parameterValues;
+    private Map<String, Object> parameterValues;
 
     /**
      * Constructs a function call.
@@ -30,7 +30,7 @@ public class FunctionCall {
      */
     public FunctionCall(
             final NodeFunctionDeclaration function,
-            final Hashtable<String, Object> parameterValues) {
+            final Map<String, Object> parameterValues) {
         this.function = function;
         this.parameterValues = parameterValues;
     }

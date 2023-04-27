@@ -2,7 +2,7 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=true,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=Node,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package com.schotanus.turtle.parser;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 
 public class NodeParseUnit extends SimpleNode {
@@ -17,7 +17,7 @@ public class NodeParseUnit extends SimpleNode {
   public void interpret() throws InterpretationException {
     NodeFunctionDeclaration function = new NodeFunctionDeclaration(-1);
     function.setName("_DEFAULT");
-    functionCallStack.push(new FunctionCall(function, new Hashtable<String, Object>()));
+    functionCallStack.push(new FunctionCall(function, new HashMap<>()));
 
     // Loop over all statements
     for (int i = 0; i < jjtGetNumChildren(); i++) {

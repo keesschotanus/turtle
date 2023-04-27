@@ -123,8 +123,7 @@ public class TurtleTerritoryModel implements Serializable {
         final List<TurtleTerritoryListener> targets = new ArrayList<>(listeners);
         TurtleTerritoryEvent event = new TurtleTerritoryEvent(this);
         for (int i = 0; i < targets.size(); i++) {
-            TurtleTerritoryListener listener =
-                (TurtleTerritoryListener)targets.get(i);
+            TurtleTerritoryListener listener = targets.get(i);
             listener.turtleTerritoryCleared(event);
         }
     }
@@ -139,8 +138,7 @@ public class TurtleTerritoryModel implements Serializable {
         final List<TurtleTerritoryListener> targets = new ArrayList<>(listeners);
         TurtleTerritoryEvent event = new TurtleTerritoryEvent(this);
         for (int i = 0; i < targets.size(); i++) {
-            TurtleTerritoryListener listener =
-                (TurtleTerritoryListener)targets.get(i);
+            TurtleTerritoryListener listener = targets.get(i);
             listener.turtleTerritoryColorChanged(event);
         }
 

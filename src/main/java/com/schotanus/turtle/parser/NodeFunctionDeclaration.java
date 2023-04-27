@@ -36,7 +36,7 @@ public class NodeFunctionDeclaration extends SimpleNode {
    * Interprets a function declaration.
    * <br>The term interprets is misleading here since the complete function
    * together with optional formal arguments and mandatory statement block
-   * is stored in a functions hashtable with a key consisting of the lower-
+   * is stored in a functions map with a key consisting of the lower-
    * case function name. When a function was previously declared the new
    * function declaration overwrites the old declaration.
    */

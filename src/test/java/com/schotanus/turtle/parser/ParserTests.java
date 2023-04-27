@@ -13,22 +13,40 @@ public class ParserTests {
      */
     @Test
     void parseSimpleForwardStatement() {
-        TurtleParser turtleParser;
         SimpleNode node;
         try {
-            turtleParser = new TurtleParser(new StringReader("forward 10"));
+            new TurtleParser(new StringReader("forward 10"));
             node = TurtleParser.parseUnit();
-            node.dump("");
         } catch (ParseException exception) {
             throw new RuntimeException();
         }
 
         try {
             node.interpret();
+            assertEquals("ParseUnitStatementBackOrForwardStatementUnaryExpressionConstant", nodeToString(node));
         } catch (InterpretationException interpretationException) {
             throw new RuntimeException();
         }
 
     }
 
+    /**
+     * Convert a node to a String.
+     * @param node The node to convert.
+     * @return String representation of the supplied node.
+     */
+    String nodeToString(SimpleNode node) {
+        StringBuilder result = new StringBuilder(node.toString());
+        final Node [] childNodes = node.children;
+        if (childNodes != null) {
+            for (int i = 0; i < childNodes.length; ++i) {
+              SimpleNode childNode = (SimpleNode)childNodes[i];
+              if (childNode != null) {
+                result.append(this.nodeToString(childNode));
+              }
+            }
+          }
+
+        return result.toString();
+    }
 }

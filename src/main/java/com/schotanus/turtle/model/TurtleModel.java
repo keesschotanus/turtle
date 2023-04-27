@@ -93,7 +93,7 @@ public class TurtleModel implements Serializable {
         final List<TurtleListener> targets = new ArrayList<>(listeners);
         TurtleEvent event = new TurtleEvent(this);
         for (int i = 0; i < targets.size(); i++) {
-            TurtleListener listener = (TurtleListener)targets.get(i);
+            TurtleListener listener = targets.get(i);
             listener.turtleTurned(event, oldHeading);
         }
     }
@@ -112,7 +112,7 @@ public class TurtleModel implements Serializable {
         final List<TurtleListener> targets = new ArrayList<>(listeners);
         TurtleEvent event = new TurtleEvent(this);
         for (int i = 0; i < targets.size(); i++) {
-            TurtleListener listener = (TurtleListener)targets.get(i);
+            TurtleListener listener = targets.get(i);
             listener.turtleMoved(event, oldX, oldY);
         }
 
@@ -129,7 +129,7 @@ public class TurtleModel implements Serializable {
         final List<TurtleListener> targets = new ArrayList<>(listeners);
         TurtleEvent event = new TurtleEvent(this);
         for (int i = 0; i < targets.size(); i++) {
-            TurtleListener listener = (TurtleListener)targets.get(i);
+            TurtleListener listener = targets.get(i);
             listener.turtleColorChanged(event, oldColor);
         }
     }
@@ -157,7 +157,7 @@ public class TurtleModel implements Serializable {
         final List<TurtleListener> targets = new ArrayList<>(listeners);
         TurtleEvent event = new TurtleEvent(this);
         for (int i = 0; i < targets.size(); i++) {
-            TurtleListener listener = (TurtleListener)targets.get(i);
+            TurtleListener listener = targets.get(i);
             listener.turtleMoved(event, oldX, oldY);
         }
     }
