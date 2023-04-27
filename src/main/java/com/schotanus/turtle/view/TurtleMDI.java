@@ -8,7 +8,7 @@ import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
 
-import com.schotanus.turtle.AbstractApplication;
+import com.schotanus.turtle.TurtleApp;
 import com.schotanus.turtle.TurtleApp;
 
 /**
@@ -81,7 +81,7 @@ public class TurtleMDI extends AbstractMDIFrame {
      */
     private class OpenCommand extends AbstractCommand {
         public void execute() {
-            AbstractApplication.changeStatusModel("Open not implemented yet!");
+            TurtleApp.changeStatusModel("Open not implemented yet!");
         }
     }
 
@@ -90,7 +90,7 @@ public class TurtleMDI extends AbstractMDIFrame {
      */
     private class SaveCommand extends AbstractCommand {
         public void execute() {
-            AbstractApplication.changeStatusModel("Save not implemented yet!");
+            TurtleApp.changeStatusModel("Save not implemented yet!");
         }
     }
 

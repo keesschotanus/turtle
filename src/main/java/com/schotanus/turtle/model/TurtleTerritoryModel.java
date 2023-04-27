@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
 
-import com.schotanus.turtle.AbstractApplication;
+import com.schotanus.turtle.TurtleApp;
 import com.schotanus.turtle.parser.InterpretationException;
 import com.schotanus.turtle.parser.ParseException;
 import com.schotanus.turtle.parser.SimpleNode;
@@ -99,7 +99,7 @@ public class TurtleTerritoryModel implements Serializable {
      *  but not interpreted.
      */
     public void parse(final String source) throws ParseException, InterpretationException {
-        AbstractApplication.changeStatusModel("Running...");
+        TurtleApp.changeStatusModel("Running...");
 
         StringReader stringReader = new StringReader(source + "\n");
         if (turtleParser == null) {
@@ -111,7 +111,7 @@ public class TurtleTerritoryModel implements Serializable {
         SimpleNode node = TurtleParser.parseUnit();
         node.interpret();
 
-        AbstractApplication.changeStatusModel("Ready.");
+        TurtleApp.changeStatusModel("Ready.");
     }
 
     /**
