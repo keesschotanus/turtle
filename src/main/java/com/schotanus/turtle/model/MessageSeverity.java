@@ -8,14 +8,14 @@ public enum MessageSeverity {
     WARNING("Warning"),
     ERROR("Error");
  
-    private String messageSeverity;
+    private String severity;
  
     MessageSeverity(String messageSeverity) {
-        this.messageSeverity = messageSeverity;
+        this.severity = messageSeverity;
     }
  
-    public String getMessageSeverity() {
-        return this.messageSeverity;
+    public String getSeverity() {
+        return this.severity;
     }
     
 }
