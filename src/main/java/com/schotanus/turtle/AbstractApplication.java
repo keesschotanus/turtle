@@ -1,7 +1,8 @@
 package com.schotanus.turtle;
 
  import java.util.Locale;
- import java.util.ResourceBundle;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
  
  import com.schotanus.turtle.model.MessageSeverity;
  import com.schotanus.turtle.model.status.StatusModel;
@@ -49,20 +50,16 @@ package com.schotanus.turtle;
      }
  
      /**
-      * Gets the resource bundle.
-      * @return The resource bundle.
+      * Gets a localized string from the resource bundle.
+      * @return The localized string or null when the key was not found.
       */
-     public static ResourceBundle getResourceBundle() {
-         return resourceBundle;
-     }
- 
-     /**
-      * Sets the resource bundle.
-      * @param bundle Resource bundle.
-      * @pre resourceBundle != null
-      */
-     public static void setResourceBundle(final ResourceBundle bundle) {
-         resourceBundle = bundle;
+     public static String getLocalizedString(final String key) {
+        try {
+            return resourceBundle.getString(key);
+        } catch (final MissingResourceException exception) {
+            return null;
+        }
+         
      }
  
      /**

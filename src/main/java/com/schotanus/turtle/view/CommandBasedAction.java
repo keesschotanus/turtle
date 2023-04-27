@@ -56,7 +56,6 @@ public class CommandBasedAction extends AbstractAction {
      * <tr><td>LongDescription</td><td>Status bar text</td></tr>
      * <tr><td>SmallIcon</td><td>Icon on button or menu item</td></tr>
      * </table>
-     * @param resourceBundle Used to fetch localized information from.
      * @param key Key to get information from the resource bundle.
      * @param commandable Object containing the actual action part of a Swing
      *  Action.
@@ -68,10 +67,7 @@ public class CommandBasedAction extends AbstractAction {
      * @pre key != null
      * @pre commandable != null
      */
-    public CommandBasedAction(
-            final ResourceBundle resourceBundle,
-            final String key,
-            final CommandableAction commandable) {
+    public CommandBasedAction(final String key, final CommandableAction commandable) {
 
         this.commandable = commandable;
         commandable.setAction(this);
@@ -81,41 +77,41 @@ public class CommandBasedAction extends AbstractAction {
 
         // Handle mandatory (for an Action) name.
         compositeKey = key + NAME;
-        value = resourceBundle.getString(compositeKey);
+        value = AbstractApplication.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getLocalizedString(compositeKey);
         }
         putValue(NAME, value);
 
         // Handle optional label
         compositeKey = key + LABEL;
-        value = resourceBundle.getString(compositeKey);
+        value = AbstractApplication.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getLocalizedString(compositeKey);
         }
         putValue(LABEL, value);
 
         // Handle optional mnemonic
         compositeKey = key + MNEMONIC;
-        value = resourceBundle.getString(compositeKey);
+        value = AbstractApplication.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getLocalizedString(compositeKey);
         }
         putValue(MNEMONIC, value);
 
         // Handle optional accelerator
         compositeKey = key + ACCELERATOR;
-        value = resourceBundle.getString(compositeKey);
+        value = AbstractApplication.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getLocalizedString(compositeKey);
         }
         putValue(ACCELERATOR, value);
 
         // Handle short description
         compositeKey = key + SHORT_DESCRIPTION;
-        value = resourceBundle.getString(compositeKey);
+        value = AbstractApplication.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getLocalizedString(compositeKey);
         }
         if (value != null) {
             putValue(SHORT_DESCRIPTION, value);
@@ -123,9 +119,9 @@ public class CommandBasedAction extends AbstractAction {
 
         // Handle long description
         compositeKey = key + LONG_DESCRIPTION;
-        value = resourceBundle.getString(compositeKey);
+        value = AbstractApplication.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getLocalizedString(compositeKey);
         }
         if (value != null) {
             putValue(LONG_DESCRIPTION, value);
@@ -133,9 +129,9 @@ public class CommandBasedAction extends AbstractAction {
 
         // Handle icon
         compositeKey = key + SMALL_ICON;
-        value = resourceBundle.getString(compositeKey);
+        value = AbstractApplication.getLocalizedString(compositeKey);
         if (value == null) {
-            value = AbstractApplication.getResourceBundle().getString(compositeKey);
+            value = AbstractApplication.getLocalizedString(compositeKey);
         }
         if (value != null) {
             final URL url = getClass().getResource(value);

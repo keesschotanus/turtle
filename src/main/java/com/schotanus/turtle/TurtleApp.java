@@ -15,13 +15,6 @@ import com.schotanus.turtle.view.TurtleMDI;
 public class TurtleApp extends AbstractApplication {
 
     /**
-     * Use: turtle/app/Turtle.properties from classpath.
-     */
-    static {
-        setResourceBundle(ResourceBundle.getBundle("com.schotanus.turtle.Turtle"));
-    }
-
-    /**
      * The territory in which turtles live.
      */
     private static TurtleTerritoryModel turtleTerritoryModel =

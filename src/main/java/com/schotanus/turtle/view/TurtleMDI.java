@@ -8,6 +8,7 @@ import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
 
+import com.schotanus.turtle.AbstractApplication;
 import com.schotanus.turtle.TurtleApp;
 
 /**
@@ -38,11 +39,12 @@ public class TurtleMDI extends AbstractMDIFrame {
         turtleFrame.setLocation(220, 10);
         addInternalFrame(turtleFrame);
 
-        actions.put("file-new", new CommandBasedAction(TurtleApp.getResourceBundle(), "aFileNew", new NewCommand()));
-        actions.put("file-save", new CommandBasedAction(TurtleApp.getResourceBundle(), "aFileSave", new SaveCommand()));
-        actions.put("file-exit", new CommandBasedAction(TurtleApp.getResourceBundle(), "aFileExit", new ExitCommand()));
+        actions.put("file-new", new CommandBasedAction("aFileNew", new NewCommand()));
+        actions.put("file-open", new CommandBasedAction("aFileOpen", new OpenCommand()));
+        actions.put("file-save", new CommandBasedAction("aFileSave", new SaveCommand()));
+        actions.put("file-exit", new CommandBasedAction("aFileExit", new ExitCommand()));
 
-        setJMenuBar(GuiCreator.createMenuBar(TurtleApp.getResourceBundle(), actions));
+        setJMenuBar(GuiCreator.createMenuBar(actions));
         getContentPane().add(createToolBar(), BorderLayout.NORTH);
     }
 
@@ -53,10 +55,10 @@ public class TurtleMDI extends AbstractMDIFrame {
     private JToolBar createToolBar() {
         final JToolBar toolBar = new ToolBar();
 
-        JButton button = toolBar.add((Action)actions.get("file-new"));
+        JButton button = toolBar.add(actions.get("file-new"));
         button.setText("");
 
-        button = toolBar.add((Action)actions.get("file-save"));
+        button = toolBar.add(actions.get("file-save"));
         button.setText("");
 
         return toolBar;
@@ -75,11 +77,20 @@ public class TurtleMDI extends AbstractMDIFrame {
     }
 
     /**
+     * Open command.
+     */
+    private class OpenCommand extends AbstractCommand {
+        public void execute() {
+            AbstractApplication.changeStatusModel("Open not implemented yet!");
+        }
+    }
+
+    /**
      * Save command.
      */
     private class SaveCommand extends AbstractCommand {
         public void execute() {
-            TurtleApp.changeStatusModel("Save not implemented yet!");
+            AbstractApplication.changeStatusModel("Save not implemented yet!");
         }
     }
 

@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
 
-import com.schotanus.turtle.TurtleApp;
+import com.schotanus.turtle.AbstractApplication;
+import com.schotanus.turtle.parser.InterpretationException;
+import com.schotanus.turtle.parser.ParseException;
 import com.schotanus.turtle.parser.SimpleNode;
 import com.schotanus.turtle.parser.TurtleParser;
 
@@ -39,7 +41,7 @@ public class TurtleTerritoryModel implements Serializable {
     /**
      * Parser to parse turtle graphics commands.
      */
-    private TurtleParser turtleParser;
+    private transient TurtleParser turtleParser;
 
     /**
      * Color of the turtle territory.
@@ -92,10 +94,12 @@ public class TurtleTerritoryModel implements Serializable {
     /**
      * Parses the supplied turtle source code.
      * @param source The source code to parse.
-     * @throws Exception When the source could not be parsed.
+     * @throws ParseException When the source could not be parsed.
+     * @throws InterpretationException  When the source could be parsed,
+     *  but not interpreted.
      */
-    public void parse(final String source) throws Exception {
-        TurtleApp.changeStatusModel("Running...");
+    public void parse(final String source) throws ParseException, InterpretationException {
+        AbstractApplication.changeStatusModel("Running...");
 
         StringReader stringReader = new StringReader(source + "\n");
         if (turtleParser == null) {
@@ -107,7 +111,7 @@ public class TurtleTerritoryModel implements Serializable {
         SimpleNode node = TurtleParser.parseUnit();
         node.interpret();
 
-        TurtleApp.changeStatusModel("Ready.");
+        AbstractApplication.changeStatusModel("Ready.");
     }
 
     /**
