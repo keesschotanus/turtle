@@ -10,7 +10,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 
 import com.schotanus.turtle.TurtleApp;
-import com.schotanus.turtle.TurtleApp;
 
 
 /**
