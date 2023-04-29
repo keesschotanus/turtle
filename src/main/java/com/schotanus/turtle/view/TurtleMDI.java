@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JToolBar;
 
 import com.schotanus.turtle.TurtleApp;
-import com.schotanus.turtle.TurtleApp;
+
 
 /**
  * Multiple Document Interface for the turtle program.
