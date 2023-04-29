@@ -364,6 +364,7 @@ public class StatusBar extends JLabel implements StatusListener {
     /**
      * Retrieves and stores the color for a Label.
      */
+    @Override
     public void updateUI() {
         super.updateUI();
         /**

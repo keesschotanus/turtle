@@ -23,12 +23,9 @@ public class TurtleCanvas extends JPanel implements
     /**
      * Paints the canvas.
      */
+    @Override
     public void paintComponent(Graphics graphics) {
-        graphics.drawImage(bufferedImage, 0, 0, new ImageObserver() {
-            public boolean imageUpdate(Image i, int i1, int i2, int i3, int i4, int i5) {
-                return true;
-            }
-        });
+        graphics.drawImage(bufferedImage, 0, 0, (image, int1, int2, int3, int4, int5) -> true );
     }
 
     /**
@@ -79,8 +76,8 @@ public class TurtleCanvas extends JPanel implements
      * @param event The TurtleTerritoryModel.TurtleTerritoryEvent.
      * @param oldHeading Previous heading of the turtle.
      */
-    public void turtleTurned(
-        final TurtleModel.TurtleEvent event, final double oldHeading) {
+    public void turtleTurned(final TurtleModel.TurtleEvent event, final double oldHeading) {
+        // Empty implementation
     }
 
     /**
@@ -96,8 +93,8 @@ public class TurtleCanvas extends JPanel implements
             graphics.setColor(event.getColor());
             graphics.setColor(event.getColor());
 
-            final double xCenter = getWidth() / 2;
-            final double yCenter = getHeight() / 2;
+            final double xCenter = getWidth() / 2.0;
+            final double yCenter = getHeight() / 2.0;
 
             final int x1 = (int) Math.round(oldX + xCenter);
             final int y1 = (int) Math.round(yCenter - oldY);
@@ -116,6 +113,7 @@ public class TurtleCanvas extends JPanel implements
      */
     public void turtleColorChanged(
             final TurtleModel.TurtleEvent event, final Color oldColor) {
+        // Empty implementation
     }
 
     /**
@@ -123,6 +121,6 @@ public class TurtleCanvas extends JPanel implements
      * @param event The dispatched event.
      */
     public void eventDispatched(java.awt.AWTEvent event) {
-        ; // Empty implementation
+        // Empty implementation
     }
 }

@@ -28,6 +28,7 @@ public class Menu extends JMenu {
      *  Normally you will supply an object of type {@link CCommandBasedAction}.
      * @return A JMenuItem initialized with data from the supplied action.
      */
+    @Override
     public JMenuItem add(Action action) {
         final JMenuItem menuItem = super.add(action);
         menuItem.setText((String)action.getValue(CommandBasedAction.LABEL));

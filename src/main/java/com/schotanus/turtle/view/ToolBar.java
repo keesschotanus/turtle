@@ -18,6 +18,7 @@ public class ToolBar extends JToolBar {
      * Constructs a localizable tool bar.
      */
     public ToolBar() {
+        // To make this ToolBar a bean.
     }
 
     /**
@@ -27,6 +28,7 @@ public class ToolBar extends JToolBar {
      *  Normally you will supply an object of type {@link CommandBasedAction}.
      * @return A JButton initialized with data from the supplied action.
      */
+    @Override
     public JButton add(final Action action) {
         final JButton button = super.add(action);
 
