@@ -26,7 +26,7 @@ public class TurtleApp {
     /**
      * Resource bundle containing all localizable properties.
      */
-    private static ResourceBundle resourceBundle = ResourceBundle.getBundle("com.schotanus.turtle.Turtle");
+    private static ResourceBundle resourceBundle = ResourceBundle.getBundle("com.schotanus.turtle.Turtle", locale);
  
     /**
      * The territory in which turtles live.
